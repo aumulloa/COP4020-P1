@@ -1,15 +1,16 @@
 #include<iostream>
-#include "Processor.cpp"
+#include "Lexer.cpp"
 
 
 using namespace std;
 
 int main() {
 
-  Processor* f = new Processor("test.txt");
+  Lexer* f = new Lexer("test.txt");
 
-  f->ProcessLines();
-  f->PrintVector();
+  f->Initialize();
+  f->PrintQueue();
+
 
   return 0;
 }

@@ -10,8 +10,8 @@ p1 : $(OBJS)
 Main.o : Main.cpp
 	$(CC) $(CFLAGS) Main.cpp
 
-Processor.o : Processor.h Processor.cpp
-	$(CC) $(CFLAGS) Processor.cpp
+Processor.o : Lexer.h Lexer.cpp
+	$(CC) $(CFLAGS) Lexer.cpp
 
 FileReader.o : FileReader.h FileReader.cpp
 	$(CC) $(CFLAGS) FileReader.cpp

@@ -4,8 +4,7 @@ enum TokenType  {
   //primitive type tokens
   TokenInteger,
   TokenChar,
-  TokenWhiteSpace,
-
+  
   //n-nary operators tokens
   TokenPlus,
   TokenMinus,
@@ -65,5 +64,6 @@ enum TokenType  {
   Token_Pred,
   Token_Chr,
   Token_Ord,
-  Token_EOF
+  Token_EOF,
+  TokenWhiteSpace
 };

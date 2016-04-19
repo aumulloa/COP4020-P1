@@ -19,6 +19,8 @@ class FileReader  {
     void OpenFile();
     void ReadLine();
     bool IsOpen();
+    char GetNext();
+    void PutBack(char c);
 };
 
 #endif

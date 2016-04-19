@@ -23,3 +23,18 @@ void FileReader::OpenFile()  {
     }
       cout << "Failed opening file" << endl;
 }
+char FileReader::GetNext()  {
+
+  if(!ifs.is_open()) {
+    cout << "File is not opened" << endl;
+    return 'a';
+  }
+
+  char nextChar;
+  ifs.get(nextChar);
+  return nextChar;
+}
+void FileReader::PutBack(char c)  {
+
+  ifs.putback(c);
+}

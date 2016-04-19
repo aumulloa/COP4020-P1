@@ -1,11 +1,8 @@
-
 enum TokenType  {
-
-  //primitive type tokens
+  TokenIdentifier,
   TokenInteger,
   TokenChar,
-
-  //n-nary operators tokens
+  TokenString,
   TokenPlus,
   TokenMinus,
   TokenMultiply,
@@ -23,19 +20,16 @@ enum TokenType  {
   TokenOr,
   TokenNot,
 
-  //colon, semicolong, comma, etc
   TokenColon,
   TokenSemiColon,
   TokenSingleDot,
   TokenComma,
-  TokenOpenCurly,
-  TokenCloseCurly,
-  TokenLeftParent,
-  TokenRightParent,
+  TokenCommentType1,
+  TokenCommentType2,
+  TokenOpenParenthesis,
+  TokenCloseParenthesis,
   TokenDoubleDot,
 
-  //keywords token
-  Token_NewLine,
   Token_Program,
   Token_Var,
   Token_Const,

@@ -30,10 +30,18 @@ public:
   Token ReadOperatorToken(char read_char);
   Token ReadDoubleOperatorToken(char read_char);
   Token ReadPunctuationToken(char read_char);
-  Token ReadCharacter(char read_char);
+  Token ReadCharacterToken();
   Token ReadKeywordToken(char read_char);
-  Token ReadWhiteSpace(char read_char);
-  Token ReadComment(char read_char);
+  Token ReadWhiteSpaceToken(char read_char);
+  Token ReadCommentType1Token();
+  Token ReadCommentType2Token();
+  Token ReadStringToken();
+  Token ReadOpenParenthesisToken();
+  Token ReadCloseParenthesisToken();
+  Token ReadPossibleKeyOrId(char read_char);
+
+
+
 
   bool IsOperator(char read_char);
   bool IsDoubleCompareOperator(char read_char);
@@ -48,6 +56,13 @@ public:
   bool IsValidCharValue(char read_char);
   bool IsOpenCurly(char read_char);
   bool IsCloseCurly(char read_char);
+  bool IsStar(char read_char);
+  bool IsDivide(char read_char);
+  bool IsDoubleQuouteChar(char read_char);
+  bool IsValidStringValue(char read_char);
+  bool IsOpenParenthesis(char read_char);
+  bool IsCloseParenthesis(char read_char);
+  bool IsPossibleIdentifier(char read_char);
 
 
 };

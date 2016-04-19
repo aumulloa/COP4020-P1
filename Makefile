@@ -23,4 +23,4 @@ TokenType.o : TokenType.cpp
 	$(CC) $(CFLAGS) TokenType.cpp
 
 clean:
-	\rm *.o *~ p1
+	\rm *.o p1

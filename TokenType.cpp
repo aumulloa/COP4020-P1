@@ -3,6 +3,8 @@ enum TokenType  {
   TokenInteger,
   TokenChar,
   TokenString,
+  TokenIntType,
+  TokenBoolean,
   TokenPlus,
   TokenMinus,
   TokenMultiply,

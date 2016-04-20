@@ -11,10 +11,10 @@ void Lexer::Initialize() {
 
     while(read_char != '~')   {
         Token myToken = GetToken(read_char);
-        if(myToken.GetTokenType() != 58)  {
+        if(myToken.GetTokenType() != 60)  {
           TokenQueue->push(myToken);
         }
-        if(myToken.GetTokenType() == 59)  {
+        if(myToken.GetTokenType() == 61)  {
           cout << "Invalid Token found, program exit!" << endl;
           return;
         }
@@ -239,6 +239,17 @@ Token Lexer::ReadKeywordToken(string keyWord) {
     Token temp_tok(temp_type, keyWord);
     return temp_tok;
   }
+  if(keyWord.compare("integer") == 0) {
+    TokenType temp_type = TokenIntType;
+    Token temp_tok(temp_type, keyWord);
+    return temp_tok;
+  }
+  if(keyWord.compare("boolean") == 0) {
+    TokenType temp_type = TokenBoolean;
+    Token temp_tok(temp_type, keyWord);
+    return temp_tok;
+  }
+
   TokenType temp_type = TokenInvalidToken;
   Token temp_tok(temp_type, "Invalid Token");
   return temp_tok;
@@ -639,6 +650,7 @@ bool Lexer::IsKeyWord(string str_key) {
       str_key.compare("read") == 0 || str_key.compare("succ") == 0 || str_key.compare("pred") == 0 ||
       str_key.compare("chr") == 0 || str_key.compare("ord") == 0 || str_key.compare("eof") == 0 ||
       str_key.compare("pred") == 0 || str_key.compare("pred") == 0 || str_key.compare("pred") == 0 ||
-      str_key.compare("pred") == 0 || str_key.compare("pred") == 0 || str_key.compare("pred") == 0) return true;
+      str_key.compare("pred") == 0 || str_key.compare("pred") == 0 || str_key.compare("pred") == 0 ||
+      str_key.compare("integer") == 0 || str_key.compare("boolean") == 0) return true;
       return false;
 }

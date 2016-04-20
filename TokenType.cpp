@@ -19,7 +19,6 @@ enum TokenType  {
   TokenAnd,
   TokenOr,
   TokenNot,
-
   TokenColon,
   TokenSemiColon,
   TokenSingleDot,
@@ -29,7 +28,6 @@ enum TokenType  {
   TokenOpenParenthesis,
   TokenCloseParenthesis,
   TokenDoubleDot,
-
   Token_Program,
   Token_Var,
   Token_Const,

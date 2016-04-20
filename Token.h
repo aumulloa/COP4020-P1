@@ -17,6 +17,7 @@ class Token {
     Token(TokenType Type, string value);
     TokenType GetTokenType();
     string GetTokenValue();
+    string GetTokenString();
 
 };
 

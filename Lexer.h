@@ -4,6 +4,7 @@
 #include <string>
 #include <sstream>
 #include <exception>
+#include <map>
 
 #include "FileReader.cpp"
 #include "Token.cpp"
@@ -21,11 +22,11 @@ private:
 
 public:
   Lexer(string filePath);
+
   void PrintQueue();
   void Initialize();
 
   Token GetToken(char read_char);
-
   Token ReadintegerToken(char read_char);
   Token ReadOperatorToken(char read_char);
   Token ReadDoubleOperatorToken(char read_char);
@@ -39,9 +40,7 @@ public:
   Token ReadOpenParenthesisToken();
   Token ReadCloseParenthesisToken();
   Token ReadPossibleKeyOrId(char read_char);
-
-
-
+  Token ReadKeywordToken(string keyWord);
 
   bool IsOperator(char read_char);
   bool IsDoubleCompareOperator(char read_char);
@@ -52,7 +51,7 @@ public:
   bool IsSwap(char read_char);
   bool IsWhitespace(char read_char);
   bool IsSingleQuoteCharacter(char read_char);
-  bool IsKeyWord(char read_char);
+  bool IsKeyWord(string str_key);
   bool IsValidCharValue(char read_char);
   bool IsOpenCurly(char read_char);
   bool IsCloseCurly(char read_char);

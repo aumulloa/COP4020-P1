@@ -1,31 +1,16 @@
-{
-	This is a program to compute the factors of entered numbers.
-	It tests:
-		procedures
-		repeat loop
-		if statement
-		arithmetic
-}
-program factors:
 
-var
-    i : integer;
+{ This program tests simple function calls for zero arguments. }
+program pr5c22:
+var a: integer;
 
-function Factor ( i : integer ):integer;
-var
-    j : integer;
+function y(d:integer):integer;
 begin
-    if i > 0 then
-	for (j := 1; j <= i; j:=j+1)
-	    if i mod j = 0 then output ( j )
-end Factor;
+	output(1)
+end y;
 
 begin
-
-    repeat
-	read(i);
-	d:=Factor ( i )
-    until i <= 0
-
-end factors.
+	output(0);
+	d:=y(3);
+	output(0)
+end pr5c22.
 ~

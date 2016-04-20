@@ -7,13 +7,17 @@ Lexer::Lexer(string filePath)  {
 }
 
 void Lexer::Initialize() {
-
     char read_char = fileReader->GetNext();
 
     while(read_char != '~')   {
         Token myToken = GetToken(read_char);
-        if(myToken.GetTokenType() != 58)
+        if(myToken.GetTokenType() != 58)  {
           TokenQueue->push(myToken);
+        }
+        if(myToken.GetTokenType() == 59)  {
+          cout << "Invalid Token found, program exit!" << endl;
+          return;
+        }
         read_char = fileReader->GetNext();
     }
 }
@@ -61,18 +65,183 @@ Token Lexer::GetToken(char read_char) {
     Token temp_token = ReadPossibleKeyOrId(read_char);
     return temp_token;
   }
-
-
-//Main Method
-  //else if(IsKeyWord(read_char)) {
-  //  Token keyword_token = ReadKeywordToken(read_char);
-  //  return keyword_token;
-//  }
-  else{
+  else  {
     TokenType temp_type = TokenInvalidToken;
     Token token_toReturn (temp_type, "InvaliddfdgfsgToken");
     return token_toReturn;
   }
+}
+
+Token Lexer::ReadKeywordToken(string keyWord) {
+
+  if(keyWord.compare("program") == 0) {
+    TokenType temp_type = Token_Program;
+    Token temp_tok(temp_type, keyWord);
+    return temp_tok;
+  }
+  if(keyWord.compare("var") == 0) {
+    TokenType temp_type = Token_Var;
+    Token temp_tok(temp_type, keyWord);
+    return temp_tok;
+  }
+  if(keyWord.compare("const") == 0 ){
+    TokenType temp_type = Token_Const;
+    Token temp_tok(temp_type, keyWord);
+    return temp_tok;
+  }
+  if(keyWord.compare("type") == 0)  {
+    TokenType temp_type = Token_Type;
+    Token temp_tok(temp_type, keyWord);
+    return temp_tok;
+  }
+  if(keyWord.compare("function") == 0)  {
+    TokenType temp_type = Token_Function;
+    Token temp_tok(temp_type, keyWord);
+    return temp_tok;
+  }
+  if(keyWord.compare("return") == 0)  {
+    TokenType temp_type = Token_Return;
+    Token temp_tok(temp_type, keyWord);
+    return temp_tok;
+  }
+  if(keyWord.compare("begin") == 0) {
+    TokenType temp_type = Token_Begin;
+    Token temp_tok(temp_type, keyWord);
+    return temp_tok;
+  }
+  if(keyWord.compare("end") == 0) {
+    TokenType temp_type = Token_End;
+    Token temp_tok(temp_type, keyWord);
+    return temp_tok;
+  }
+  if(keyWord.compare("output") == 0) {
+    TokenType temp_type = Token_Output;
+    Token temp_tok(temp_type, keyWord);
+    return temp_tok;
+  }
+  if(keyWord.compare("if") == 0){
+    TokenType temp_type = Token_If;
+    Token temp_tok(temp_type, keyWord);
+    return temp_tok;
+  }
+  if(keyWord.compare("then") == 0)  {
+    TokenType temp_type = Token_Then;
+    Token temp_tok(temp_type, keyWord);
+    return temp_tok;
+  }
+  if(keyWord.compare("else") == 0)  {
+    TokenType temp_type = Token_Else;
+    Token temp_tok(temp_type, keyWord);
+    return temp_tok;
+  }
+  if(keyWord.compare("while") == 0) {
+    TokenType temp_type = Token_While;
+    Token temp_tok(temp_type, keyWord);
+    return temp_tok;
+  }
+  if(keyWord.compare("do") == 0)  {
+    TokenType temp_type = Token_Do;
+    Token temp_tok(temp_type, keyWord);
+    return temp_tok;
+  }
+  if(keyWord.compare("case") == 0)  {
+    TokenType temp_type = Token_Case;
+    Token temp_tok(temp_type, keyWord);
+    return temp_tok;
+  }
+  if(keyWord.compare("of") == 0)  {
+    TokenType temp_type = Token_Of;
+    Token temp_tok(temp_type, keyWord);
+    return temp_tok;
+  }
+  if(keyWord.compare("otherwise") == 0)  {
+    TokenType temp_type = Token_Otherwise;
+    Token temp_tok(temp_type, keyWord);
+    return temp_tok;
+  }
+  if(keyWord.compare("repeat") == 0)  {
+    TokenType temp_type = Token_Repeat;
+    Token temp_tok(temp_type, keyWord);
+    return temp_tok;
+  }
+  if(keyWord.compare("for") == 0){
+    TokenType temp_type = Token_For;
+    Token temp_tok(temp_type, keyWord);
+    return temp_tok;
+  }
+  if(keyWord.compare("until") == 0) {
+    TokenType temp_type = Token_Until;
+    Token temp_tok(temp_type, keyWord);
+    return temp_tok;
+  }
+  if(keyWord.compare("loop") == 0)  {
+    TokenType temp_type = Token_Loop;
+    Token temp_tok(temp_type, keyWord);
+    return temp_tok;
+  }
+  if(keyWord.compare("pool") == 0)  {
+    TokenType temp_type = Token_Pool;
+    Token temp_tok(temp_type, keyWord);
+    return temp_tok;
+  }
+  if(keyWord.compare("exit") == 0)  {
+    TokenType temp_type = Token_Exit;
+    Token temp_tok(temp_type, keyWord);
+    return temp_tok;
+  }
+  if(keyWord.compare("mod") == 0) {
+    TokenType temp_type = TokenMod;
+    Token temp_tok(temp_type, keyWord);
+    return temp_tok;
+  }
+  if(keyWord.compare("and") == 0) {
+    TokenType temp_type = TokenAnd;
+    Token temp_tok(temp_type, keyWord);
+    return temp_tok;
+  }
+  if(keyWord.compare("or") == 0)  {
+    TokenType temp_type = TokenOr;
+    Token temp_tok(temp_type, keyWord);
+    return temp_tok;
+  }
+  if(keyWord.compare("not") == 0) {
+    TokenType temp_type = TokenNot;
+    Token temp_tok(temp_type, keyWord);
+    return temp_tok;
+  }
+  if(keyWord.compare("read") == 0)  {
+    TokenType temp_type = Token_Read;
+    Token temp_tok(temp_type, keyWord);
+    return temp_tok;
+  }
+  if(keyWord.compare("succ") == 0)  {
+    TokenType temp_type = Token_Succ;
+    Token temp_tok(temp_type, keyWord);
+    return temp_tok;
+  }
+  if(keyWord.compare("pred") == 0)  {
+    TokenType temp_type = Token_Pred;
+    Token temp_tok(temp_type, keyWord);
+    return temp_tok;
+  }
+  if(keyWord.compare("chr") == 0) {
+    TokenType temp_type = Token_Chr;
+    Token temp_tok(temp_type, keyWord);
+    return temp_tok;
+  }
+  if(keyWord.compare("ord") == 0) {
+    TokenType temp_type = Token_Ord;
+    Token temp_tok(temp_type, keyWord);
+    return temp_tok;
+  }
+  if(keyWord.compare("eof") == 0) {
+    TokenType temp_type = Token_EOF;
+    Token temp_tok(temp_type, keyWord);
+    return temp_tok;
+  }
+  TokenType temp_type = TokenInvalidToken;
+  Token temp_tok(temp_type, "Invalid Token");
+  return temp_tok;
 }
 
 Token Lexer::ReadPossibleKeyOrId(char read_char) {
@@ -87,14 +256,14 @@ Token Lexer::ReadPossibleKeyOrId(char read_char) {
   }
   fileReader->PutBack(read_next);
 
-//  if(IsKeyWord(target)) {
-//    return ReadKeywordToken();
-//  }
-  //else {
+  if(IsKeyWord(target)) {
+    return ReadKeywordToken(target);
+  }
+  else {
     TokenType temp_type = TokenIdentifier;
     Token token_toReturn (temp_type, target);
     return token_toReturn;
-//}
+  }
 
 }
 
@@ -338,8 +507,7 @@ void Lexer::PrintQueue()  {
   while(!TokenQueue->empty()) {
     Token temp = TokenQueue->front();
     TokenQueue->pop();
-
-    cout << "TokenType: " << temp.GetTokenType() << " TokenValue: " << temp.GetTokenValue() << endl;
+    cout << "TokenType: " << temp.GetTokenString() << " TokenValue: " << temp.GetTokenValue() << endl;
   }
 }
 
@@ -397,7 +565,7 @@ bool Lexer::IsValidCharValue(char read_char)  {
   if(read_char != '\'') return true;
   return false;
 }
-//need to implement IsKeyWord
+
 bool Lexer::IsOpenCurly(char read_char) {
   if(read_char == '{') return true;
   return false;
@@ -405,10 +573,6 @@ bool Lexer::IsOpenCurly(char read_char) {
 
 bool Lexer::IsCloseCurly(char read_char) {
   if(read_char == '}') return true;
-  return false;
-}
-
-bool Lexer::IsKeyWord(char read_char) {
   return false;
 }
 
@@ -459,4 +623,22 @@ bool Lexer::IsPossibleIdentifier(char read_char)  {
     read_char == 'w' || read_char == 'W' || read_char == 'x' || read_char == 'X' ||
     read_char == 'y' || read_char == 'Y' || read_char == 'z' || read_char == 'Z') return true;
     return false;
+}
+
+bool Lexer::IsKeyWord(string str_key) {
+
+  if  (str_key.compare("program") == 0 || str_key.compare("var") == 0 || str_key.compare("const") == 0 ||
+      str_key.compare("type") == 0 || str_key.compare("function") == 0 || str_key.compare("return") == 0 ||
+      str_key.compare("begin") == 0 || str_key.compare("end") == 0 || str_key.compare("output") == 0 ||
+      str_key.compare("if") == 0 || str_key.compare("then") == 0 || str_key.compare("else") == 0 ||
+      str_key.compare("while") == 0 || str_key.compare("do") == 0 || str_key.compare("case") == 0 ||
+      str_key.compare("of") == 0 || str_key.compare("otherwise") == 0 || str_key.compare("repeat") == 0 ||
+      str_key.compare("for") == 0 || str_key.compare("until") == 0 || str_key.compare("loop") == 0 ||
+      str_key.compare("pool") == 0 || str_key.compare("exit") == 0 || str_key.compare("mod") == 0 ||
+      str_key.compare("and") == 0 || str_key.compare("or") == 0 || str_key.compare("not") == 0 ||
+      str_key.compare("read") == 0 || str_key.compare("succ") == 0 || str_key.compare("pred") == 0 ||
+      str_key.compare("chr") == 0 || str_key.compare("ord") == 0 || str_key.compare("eof") == 0 ||
+      str_key.compare("pred") == 0 || str_key.compare("pred") == 0 || str_key.compare("pred") == 0 ||
+      str_key.compare("pred") == 0 || str_key.compare("pred") == 0 || str_key.compare("pred") == 0) return true;
+      return false;
 }

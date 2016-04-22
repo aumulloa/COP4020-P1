@@ -3,7 +3,7 @@
 program pr5c22:
 var a: integer;
 
-function y(d:integer):integer;
+function y(d:integer):integer; #this is a comment !; function 'a' : "still comment"
 begin
 	output(1)
 end y;

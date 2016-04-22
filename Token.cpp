@@ -72,6 +72,7 @@ string Token::GetTokenString()  {
   if(this->GetTokenType() == TokenInvalidToken) return "Token_Invalid";
   if(this->GetTokenType() == TokenIntType) return "Token_IntType";
   if(this->GetTokenType() == TokenBoolean) return "Token_Boolean";
+  if(this->GetTokenType() == TokenCommentType3) return "Token_Comment_Type3";
 
   return "Token_Invalid";
 }

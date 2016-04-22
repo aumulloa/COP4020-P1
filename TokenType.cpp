@@ -27,6 +27,7 @@ enum TokenType  {
   TokenComma,
   TokenCommentType1,
   TokenCommentType2,
+  TokenCommentType3,
   TokenOpenParenthesis,
   TokenCloseParenthesis,
   TokenDoubleDot,

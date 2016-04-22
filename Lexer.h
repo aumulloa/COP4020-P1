@@ -36,6 +36,7 @@ public:
   Token ReadWhiteSpaceToken(char read_char);
   Token ReadCommentType1Token();
   Token ReadCommentType2Token();
+  Token ReadCommentType3Token();
   Token ReadStringToken();
   Token ReadOpenParenthesisToken();
   Token ReadCloseParenthesisToken();
@@ -62,7 +63,7 @@ public:
   bool IsOpenParenthesis(char read_char);
   bool IsCloseParenthesis(char read_char);
   bool IsPossibleIdentifier(char read_char);
-
+  bool IsHashTag(char read_char);
 
 };
 

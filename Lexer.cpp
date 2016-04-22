@@ -11,10 +11,10 @@ void Lexer::Initialize() {
 
     while(read_char != '~')   {
         Token myToken = GetToken(read_char);
-        if(myToken.GetTokenType() != 60)  {
+        if(myToken.GetTokenType() != 61)  {
           TokenQueue->push(myToken);
         }
-        if(myToken.GetTokenType() == 61)  {
+        if(myToken.GetTokenType() == 62)  {
           cout << "Invalid Token found, program exit!" << endl;
           return;
         }
@@ -49,6 +49,11 @@ Token Lexer::GetToken(char read_char) {
     Token comment_token = ReadCommentType1Token();
     return comment_token;
   }
+  else if(IsHashTag(read_char)) {
+    cout << "PO";
+    Token comment_token = ReadCommentType3Token();
+    return comment_token;
+  }
   else if(IsDoubleQuouteChar(read_char)) {
     Token string_token = ReadStringToken();
     return string_token;
@@ -72,6 +77,19 @@ Token Lexer::GetToken(char read_char) {
   }
 }
 
+Token Lexer::ReadCommentType3Token()  {
+  char read_next = fileReader->GetNext();
+
+  string comment_string = "";
+
+  while(read_next != '\n') {
+    comment_string += read_next;
+    read_next = fileReader->GetNext();
+  }
+  TokenType temp_type = TokenCommentType3;
+  Token token_toReturn (temp_type, comment_string);
+  return token_toReturn;
+}
 Token Lexer::ReadKeywordToken(string keyWord) {
 
   if(keyWord.compare("program") == 0) {
@@ -635,7 +653,10 @@ bool Lexer::IsPossibleIdentifier(char read_char)  {
     read_char == 'y' || read_char == 'Y' || read_char == 'z' || read_char == 'Z') return true;
     return false;
 }
-
+bool Lexer::IsHashTag(char read_char) {
+  if(read_char == '#')  return true;
+  return false;
+}
 bool Lexer::IsKeyWord(string str_key) {
 
   if  (str_key.compare("program") == 0 || str_key.compare("var") == 0 || str_key.compare("const") == 0 ||

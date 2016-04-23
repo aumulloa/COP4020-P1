@@ -20,8 +20,6 @@ begin
 	    if i mod j = 0 then output ( j )
 end Factor;
 
-begin
-
     repeat
 	read(i);
 	d:=Factor ( i )

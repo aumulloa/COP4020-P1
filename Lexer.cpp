@@ -255,7 +255,6 @@ void Lexer::ReadIdentifier()  {
   {
     string message = "Expected: <identifier>. Found: " + to_string(token.Type);
     throw logic_error(message);
-    return;
   }
 
   TokenQueue->pop();
@@ -714,22 +713,23 @@ void Lexer::Primary() {
       break;
     default:
     throw logic_error("Expected: Primary");
-      return;
   }
 }
 
 void Lexer::Initialize() {
+
     char read_char = fileReader->GetNext();
 
     while(true) {
+
         Token myToken = GetToken(read_char);
         if(myToken.Type != 0 && myToken.Type != 1 && myToken.Type != 2 && myToken.Type != 3 && myToken.Type != 4)  {
           TokenQueue->push(myToken);
         }
 
         if(myToken.Type == 4)  {
-          cout << "Invalid Token found, program exit!" << endl;
-          return;
+          string message = "Invalid Token found, program exit!";
+          throw logic_error(message);
         }
 
         if(myToken.Type == 100)  {
@@ -737,7 +737,6 @@ void Lexer::Initialize() {
         }
         read_char = fileReader->GetNext();
     }
-
 }
 
 Token Lexer::GetToken(char read_char) {
@@ -1244,7 +1243,7 @@ void Lexer::PrintQueue()  {
   while(!TokenQueue->empty()) {
     Token temp = TokenQueue->front();
     TokenQueue->pop();
-    cout << "TokenType: " << temp.GetTokenString() << " TokenValue: " << temp.GetTokenValue() << endl;
+    cout << "TokenType: " << temp.GetTokenString() << " TokenValue: " << temp.value << endl;
   }
 }
 

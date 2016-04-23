@@ -1,11 +1,12 @@
+EXECUTABLE = p1
 OBJS = Main.o Lexer.o FileReader.o Token.o Tree.o
 CC = g++
 DEBUG = -g
 CFLAGS = -Wall -c $(DEBUG)
 LFLAGS = -Wall $(DEBUG)
 
-p1: $(OBJS)
-	$(CC) $(LFLAGS) -o p1 $(OBJS)
+$(EXECUTABLE): $(OBJS)
+	$(CC) $(LFLAGS) -o $(EXECUTABLE) $(OBJS)
 
 Main.o : Main.cpp Lexer.cpp Tree.cpp
 	$(CC) $(CFLAGS) Main.cpp

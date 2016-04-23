@@ -11,23 +11,22 @@ bool FileReader::IsOpen() {
 void FileReader::OpenFile()  {
 
     if(ifs.is_open()) {
-      cout << "File already open" << endl;
       return;
     }
 
     ifs.open(this->filePath.c_str());
 
     if(ifs.is_open()) {
-      cout << "File open, ready to start reading!" << endl;
       return;
     }
-      cout << "Failed opening file" << endl;
+    string message = "Error opening file";
+    throw logic_error(message);
 }
 char FileReader::GetNext()  {
 
   if(!ifs.is_open()) {
-    cout << "File is not opened" << endl;
-    return 'a';
+    string message = "File is not opened";
+    throw logic_error(message);
   }
 
   char nextChar;

@@ -33,9 +33,8 @@ void Lexer::ReadToken(TokenType type) {
 
   if (token.Type != type)
   {
-
-    //string error_message = "Expected: " + to_string(type) + ". Found: " + to_string(token.Type);
-    //return;
+    string message = "Expected: " + to_string(type) + ". Found: " + to_string(token.Type);
+    throw logic_error(message);
   }
 
   TokenQueue->pop();
@@ -254,8 +253,8 @@ void Lexer::ReadIdentifier()  {
 
   if (token.Type != TokenIdentifier)
   {
-    //string error_message = "Expected: <identifier>. Found: " + to_string(token.type);
-    //throw logic_error(error_message);
+    string message = "Expected: <identifier>. Found: " + to_string(token.Type);
+    throw logic_error(message);
     return;
   }
 
@@ -274,9 +273,8 @@ void Lexer::ReadString() {
 
   if (token.Type != TokenString)
   {
-    //string error_message = "Expected: <string>. Found: " + to_string(token.type);
-    //throw logic_error(error_message);
-    return;
+    string message = "Expected: <string>. Found: " + to_string(token.Type);
+    throw logic_error(message);
   }
 
   TokenQueue->pop();
@@ -295,39 +293,36 @@ void Lexer::ReadChar() {
 
   if (token.Type != TokenChar)
   {
-    //string error_message = "Expected: <char>. Found: " + to_string(token.type);
-    // /throw logic_error(error_message);
-    return;
+    string message = "Expected: <char>. Found: " + to_string(token.Type);
+    throw logic_error(message);
   }
 
   TokenQueue->pop();
 
-  Tree* internal = new Tree(token.value);
+  Tree* id = new Tree("<char>");
+  Tree* tempTree = new Tree(token.value);
 
-  Tree* identifier = new Tree("<char>");
-  identifier->children.push_back(internal);
-
-  Trees->push(identifier);
+  id->children.push_back(tempTree);
+  Trees->push(id);
 }
 
 void Lexer::ReadInt() {
+
   Token token = TokenQueue->front();
 
   if (token.Type != TokenInteger)
   {
-    return;
-    //string error_message = "Expected: <integer>. Found: " + to_string(token.type);
-    //throw logic_error(error_message);
-  }
 
+    string message = "Expected: <integer>. Found: " + to_string(token.Type);
+    throw logic_error(message);
+  }
   TokenQueue->pop();
 
-  Tree* internal = new Tree(token.value);
+  Tree* id = new Tree("<integer>");
+  Tree* inner = new Tree(token.value);
 
-  Tree* identifier = new Tree("<integer>");
-  identifier->children.push_back(internal);
-
-  Trees->push(identifier);
+  id->children.push_back(inner);
+  Trees->push(id);
 }
 
 void Lexer::CaseExpression()  {
@@ -379,9 +374,8 @@ void Lexer::Assignment()  {
   }
   else
   {
-    return;
-    //string error_message = "Expected: TOKEN_ASSIGNMENT or TOKEN_SWAP. Found: " + to_string(tokens->front().type);
-    //throw logic_error(error_message);
+    string message = "Expected: TokenAssign/TokenSwap. Found: " + to_string(TokenQueue->front().Type);
+    throw logic_error(message);
   }
 }
 
@@ -719,7 +713,7 @@ void Lexer::Primary() {
       BuildTree("ord", 1);
       break;
     default:
-    //throw logic_error("Expected: Primary");
+    throw logic_error("Expected: Primary");
       return;
   }
 }
@@ -727,7 +721,7 @@ void Lexer::Primary() {
 void Lexer::Initialize() {
     char read_char = fileReader->GetNext();
 
-    while(read_char != '~')   {
+    while(true) {
         Token myToken = GetToken(read_char);
         if(myToken.Type != 0 && myToken.Type != 1 && myToken.Type != 2 && myToken.Type != 3 && myToken.Type != 4)  {
           TokenQueue->push(myToken);
@@ -735,6 +729,10 @@ void Lexer::Initialize() {
 
         if(myToken.Type == 4)  {
           cout << "Invalid Token found, program exit!" << endl;
+          return;
+        }
+
+        if(myToken.Type == 100)  {
           return;
         }
         read_char = fileReader->GetNext();

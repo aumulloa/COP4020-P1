@@ -1,9 +1,9 @@
-#include<iostream>
-#include<string>
-#include "TokenType.cpp"
+#include <iostream>
+#include <string>
+#include "TokenType.h"
 
-#ifndef Token_H
-#define Token_H
+#ifndef TOKEN_H
+#define TOKEN_H
 
 using namespace std;
 

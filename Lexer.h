@@ -5,20 +5,19 @@
 #include <string>
 #include <sstream>
 
-#include "FileReader.cpp"
-#include "Token.cpp"
-#include "Tree.cpp"
+#include "FileReader.h"
+#include "Token.h"
+#include "TokenType.h"
+#include "Tree.h"
 
-#ifndef Lexer_H
-#define Lexer_H
+#ifndef LEXER_H
+#define LEXER_H
 
 using namespace std;
 
 class Lexer {
 
 private:
-
-
 
 public:
   Lexer(string filePath);

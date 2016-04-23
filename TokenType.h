@@ -1,3 +1,6 @@
+#ifndef TOKENTYPE_H
+#define TOKENTYPE_H
+
 enum TokenType  {
 
   TokenCommentType1 = 0,
@@ -28,7 +31,7 @@ enum TokenType  {
 
   TokenColon,
   TokenSemiColon,
-  TokenSingleDot,
+  TokenSingleDot = 100,
   TokenComma,
   TokenOpenParenthesis,
   TokenCloseParenthesis,
@@ -65,7 +68,7 @@ enum TokenType  {
   TokenOr,
   TokenNot,
 
-  
+
   Token_Read,
   Token_Succ,
   Token_Pred,
@@ -73,3 +76,5 @@ enum TokenType  {
   Token_Ord,
   Token_EOF
 };
+
+#endif

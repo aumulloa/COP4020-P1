@@ -1,29 +1,22 @@
-OBJS = Main.o
+OBJS = Main.o Lexer.o FileReader.o Token.o Tree.o
 CC = g++
 DEBUG = -g
 CFLAGS = -Wall -c $(DEBUG)
 LFLAGS = -Wall $(DEBUG)
 
-p1 : $(OBJS)
-	$(CC) $(LFLAGS) $(OBJS) -o p1
+p1: $(OBJS)
+	$(CC) $(LFLAGS) -o p1 $(OBJS)
 
-Main.o : Main.cpp
+Main.o : Main.cpp Lexer.cpp Tree.cpp
 	$(CC) $(CFLAGS) Main.cpp
 
-Processor.o : Lexer.h Lexer.cpp
-	$(CC) $(CFLAGS) Lexer.cpp
+Lexer.o : Lexer.h FileReader.h Token.h TokenType.h Tree.h
 
-FileReader.o : FileReader.h FileReader.cpp
-	$(CC) $(CFLAGS) FileReader.cpp
+FileReader.o : FileReader.h
 
-Tree.o : Tree.cpp
-	$(CC) $(CFLAGS) Tree.cpp
+Token.o : Token.h TokenType.h
 
-Token.o : Token.h Token.cpp
-	$(CC) $(CFLAGS) Token.cpp
-
-TokenType.o : TokenType.cpp
-	$(CC) $(CFLAGS) TokenType.cpp
+Tree.o : Tree.h
 
 clean:
 	\rm *.o p1

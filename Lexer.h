@@ -1,13 +1,13 @@
 #include<iostream>
 #include <queue>
+#include <stack>
 #include <vector>
 #include <string>
 #include <sstream>
-#include <exception>
-#include <map>
 
 #include "FileReader.cpp"
 #include "Token.cpp"
+#include "Tree.cpp"
 
 #ifndef Lexer_H
 #define Lexer_H
@@ -17,11 +17,54 @@ using namespace std;
 class Lexer {
 
 private:
-  FileReader* fileReader;
-  queue<Token>* TokenQueue;
+
+
 
 public:
   Lexer(string filePath);
+
+  stack<Tree*>* Trees;
+
+  FileReader* fileReader;
+  queue<Token>* TokenQueue;
+
+  Tree* Parse();
+
+  void Tiny();
+  void ReadToken(TokenType type);
+  void ReadIdentifier();
+  void ReadInt();
+  void ReadChar();
+  void ReadString();
+  void Primary();
+  void Name();
+  void Consts();
+  void Const();
+  void ConstVal();
+  void BuildTree(string name, int count);
+  void Expression();
+  void Assignment();
+  void Term();
+  void Factor();
+  void ForExp();
+  void ForStat();
+  void Body();
+  void Dcln();
+  void Dclns();
+  void Params();
+  void OtherwiseClause();
+  void CaseExpression();
+  void Statement();
+  void Caseclause();
+  int Caseclauses();
+  void LitList();
+  void Type();
+  void Types();
+  void StrNode();
+  void OutExp();
+  void Fcn();
+  void SubProgs();
+
 
   void PrintQueue();
   void Initialize();

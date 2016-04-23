@@ -1,14 +1,22 @@
 enum TokenType  {
+
+  TokenCommentType1 = 0,
+  TokenCommentType2 = 1,
+  TokenCommentType3 = 2,
+  TokenWhiteSpace = 3,
+  TokenInvalidToken = 4,
+
   TokenIdentifier,
   TokenInteger,
   TokenChar,
   TokenString,
-  TokenIntType,
-  TokenBoolean,
+
   TokenPlus,
   TokenMinus,
   TokenMultiply,
   TokenDivide,
+
+
   TokenSwap,
   TokenAssign,
   TokenLessThanEquals,
@@ -17,20 +25,16 @@ enum TokenType  {
   TokenGreaterThan,
   TokenNotEquals,
   TokenEquals,
-  TokenMod,
-  TokenAnd,
-  TokenOr,
-  TokenNot,
+
   TokenColon,
   TokenSemiColon,
   TokenSingleDot,
   TokenComma,
-  TokenCommentType1,
-  TokenCommentType2,
-  TokenCommentType3,
   TokenOpenParenthesis,
   TokenCloseParenthesis,
   TokenDoubleDot,
+
+
   Token_Program,
   Token_Var,
   Token_Const,
@@ -54,12 +58,18 @@ enum TokenType  {
   Token_Loop,
   Token_Pool,
   Token_Exit,
+
+
+  TokenMod,
+  TokenAnd,
+  TokenOr,
+  TokenNot,
+
+  
   Token_Read,
   Token_Succ,
   Token_Pred,
   Token_Chr,
   Token_Ord,
-  Token_EOF,
-  TokenWhiteSpace,
-  TokenInvalidToken
+  Token_EOF
 };

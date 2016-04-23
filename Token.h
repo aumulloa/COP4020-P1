@@ -10,14 +10,15 @@ using namespace std;
 class Token {
 
   private:
-    TokenType Type;
-    string value;
+
 
   public:
     Token(TokenType Type, string value);
     TokenType GetTokenType();
     string GetTokenValue();
     string GetTokenString();
+    TokenType Type;
+    string value;
 
 };
 

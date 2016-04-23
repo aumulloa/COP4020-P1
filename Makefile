@@ -16,6 +16,9 @@ Processor.o : Lexer.h Lexer.cpp
 FileReader.o : FileReader.h FileReader.cpp
 	$(CC) $(CFLAGS) FileReader.cpp
 
+Tree.o : Tree.cpp
+	$(CC) $(CFLAGS) Tree.cpp
+
 Token.o : Token.h Token.cpp
 	$(CC) $(CFLAGS) Token.cpp
 

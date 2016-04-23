@@ -70,9 +70,9 @@ string Token::GetTokenString()  {
   if(this->GetTokenType() == Token_EOF) return "Token_EOF";
   if(this->GetTokenType() == TokenWhiteSpace) return "Token_White_Space";
   if(this->GetTokenType() == TokenInvalidToken) return "Token_Invalid";
-  if(this->GetTokenType() == TokenIntType) return "Token_IntType";
-  if(this->GetTokenType() == TokenBoolean) return "Token_Boolean";
   if(this->GetTokenType() == TokenCommentType3) return "Token_Comment_Type3";
+  if(this->GetTokenType() == TokenEquals) return "token_Equals";
+  if(this->GetTokenType() == TokenNotEquals) return "Token_Not_Equals";
 
   return "Token_Invalid";
 }

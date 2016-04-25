@@ -1074,10 +1074,9 @@ Token Lexer::ReadCharacterToken()  {
     char read_next_next = fileReader->GetNext();
       if(IsSingleQuoteCharacter(read_next_next))  {
         TokenType temp_type = TokenChar;
-        stringstream ss;
-        string target;
-        ss << read_next;
-        ss >> target;
+        string target = "\'";
+        target += read_next;
+        target += "\'";
         Token token_toReturn (temp_type, target);
         return token_toReturn;
       }

@@ -20,4 +20,4 @@ Token.o : Token.h TokenType.h
 Tree.o : Tree.h
 
 clean:
-	\rm *.o p1
+	rm -f *.o p1

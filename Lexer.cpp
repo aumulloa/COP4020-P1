@@ -1,6 +1,6 @@
 #include "Lexer.h"
 
-Lexer::Lexer(string filePath)  {
+Lexer::Lexer(char* filePath)  {
   fileReader = new FileReader(filePath);
   fileReader->OpenFile();
   TokenQueue = new queue<Token>();
@@ -15,14 +15,14 @@ Tree* Lexer::Parse()  {
 
 void Lexer::Tiny()  {
   ReadToken(Token_Program);
-  Name();
+  ReadIdentifier();
   ReadToken(TokenColon);
   Consts();
   Types();
   Dclns();
   SubProgs();
   Body();
-  Name();
+  ReadIdentifier();
   ReadToken(TokenSingleDot);
   BuildTree("program", 7);
 }
@@ -30,18 +30,14 @@ void Lexer::Tiny()  {
 void Lexer::ReadToken(TokenType type) {
 
   Token token = TokenQueue->front();
-
+  Token temp(type, "");
   if (token.Type != type)
   {
-    string message = "Expected: " + to_string(type) + ". Found: " + to_string(token.Type);
+    string message = "Expected: " + temp.GetTokenType();
+    message += ". Found: " + token.GetTokenString();
     throw logic_error(message);
   }
-
   TokenQueue->pop();
-}
-
-void Lexer::Name()  {
-  ReadIdentifier();
 }
 
 void Lexer::Consts()  {
@@ -65,10 +61,9 @@ void Lexer::Consts()  {
 }
 
 void Lexer::Const() {
-  Name();
+  ReadIdentifier();
   ReadToken(TokenEquals);
   ConstVal();
-
   BuildTree("const", 2);
 }
 
@@ -81,7 +76,7 @@ void Lexer::ConstVal()  {
       ReadChar();
       break;
     default:
-      Name();
+      ReadIdentifier();
   }
 }
 
@@ -107,7 +102,7 @@ void Lexer::Types()  {
 }
 
 void Lexer::Type() {
-  Name();
+  ReadIdentifier();
   ReadToken(TokenEquals);
   LitList();
   BuildTree("type", 2);
@@ -117,11 +112,11 @@ void Lexer::LitList()  {
 
   ReadToken(TokenOpenParenthesis);
   int count = 1;
-  Name();
+  ReadIdentifier();
   while (TokenQueue->front().Type == TokenComma)
   {
     ReadToken(TokenComma);
-    Name();
+    ReadIdentifier();
     count++;
   }
   ReadToken(TokenCloseParenthesis);
@@ -152,15 +147,15 @@ void Lexer::Params()  {
 
 void Lexer::Dcln()  {
   int count = 1;
-  Name();
+  ReadIdentifier();
   while (TokenQueue->front().Type == TokenComma)
   {
     ReadToken(TokenComma);
-    Name();
+    ReadIdentifier();
     count++;
   }
   ReadToken(TokenColon);
-  Name();
+  ReadIdentifier();
   BuildTree("var", count + 1);
 }
 
@@ -201,18 +196,18 @@ void Lexer::Body()  {
 
 void Lexer::Fcn() {
   ReadToken(Token_Function);
-  Name();
+  ReadIdentifier();
   ReadToken(TokenOpenParenthesis);
   Params();
   ReadToken(TokenCloseParenthesis);
   ReadToken(TokenColon);
-  Name();
+  ReadIdentifier();
   ReadToken(TokenSemiColon);
   Consts();
   Types();
   Dclns();
   Body();
-  Name();
+  ReadIdentifier();
   ReadToken(TokenSemiColon);
   BuildTree("fcn", 8);
 }
@@ -253,7 +248,8 @@ void Lexer::ReadIdentifier()  {
 
   if (token.Type != TokenIdentifier)
   {
-    string message = "Expected: <identifier>. Found: " + to_string(token.Type);
+    string message = "Expected: <identifier>. Found: ";
+    message += token.GetTokenString();
     throw logic_error(message);
   }
 
@@ -272,7 +268,8 @@ void Lexer::ReadString() {
 
   if (token.Type != TokenString)
   {
-    string message = "Expected: <string>. Found: " + to_string(token.Type);
+    string message = "Expected: <string>. Found: ";
+    message += token.GetTokenString();
     throw logic_error(message);
   }
 
@@ -292,7 +289,8 @@ void Lexer::ReadChar() {
 
   if (token.Type != TokenChar)
   {
-    string message = "Expected: <char>. Found: " + to_string(token.Type);
+    string message = "Expected: <char>. Found: ";
+    message += token.GetTokenString();
     throw logic_error(message);
   }
 
@@ -312,7 +310,8 @@ void Lexer::ReadInt() {
   if (token.Type != TokenInteger)
   {
 
-    string message = "Expected: <integer>. Found: " + to_string(token.Type);
+    string message = "Expected: <integer>. Found: ";
+    message += token.GetTokenString();
     throw logic_error(message);
   }
   TokenQueue->pop();
@@ -358,7 +357,7 @@ void Lexer::OtherwiseClause()  {
 
 void Lexer::Assignment()  {
 
-  Name();
+  ReadIdentifier();
   if (TokenQueue->front().Type == TokenAssign)
   {
     ReadToken(TokenAssign);
@@ -368,12 +367,13 @@ void Lexer::Assignment()  {
   else if (TokenQueue->front().Type == TokenSwap)
   {
     ReadToken(TokenSwap);
-    Name();
+    ReadIdentifier();
     BuildTree("swap", 2);
   }
   else
   {
-    string message = "Expected: TokenAssign/TokenSwap. Found: " + to_string(TokenQueue->front().Type);
+    string message = "Expected: TokenAssign/TokenSwap. Found: ";
+    message += TokenQueue->front().GetTokenString();
     throw logic_error(message);
   }
 }
@@ -608,11 +608,11 @@ void Lexer::Statement() {
       ReadToken(Token_Read);
       ReadToken(TokenOpenParenthesis);
       count = 1;
-      Name();
+      ReadIdentifier();
       while (TokenQueue->front().Type == TokenComma)
       {
         ReadToken(TokenComma);
-        Name();
+        ReadIdentifier();
         count++;
       }
       ReadToken(TokenCloseParenthesis);
@@ -662,7 +662,7 @@ void Lexer::Primary() {
       BuildTree("eof", 0);
       break;
     case TokenIdentifier:
-      Name();
+      ReadIdentifier();
       if (TokenQueue->front().Type == TokenOpenParenthesis)
       {
         ReadToken(TokenOpenParenthesis);

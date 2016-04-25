@@ -1,6 +1,6 @@
 #include "FileReader.h"
 
-FileReader::FileReader(string filePath) {
+FileReader::FileReader(char* filePath) {
   this->filePath = filePath;
 }
 
@@ -14,7 +14,7 @@ void FileReader::OpenFile()  {
       return;
     }
 
-    ifs.open(this->filePath.c_str());
+    ifs.open(this->filePath);
 
     if(ifs.is_open()) {
       return;

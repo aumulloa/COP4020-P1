@@ -4,6 +4,8 @@
 #include <vector>
 #include <string>
 #include <sstream>
+#include <stdexcept>
+
 
 #include "FileReader.h"
 #include "Token.h"
@@ -20,7 +22,7 @@ class Lexer {
 private:
 
 public:
-  Lexer(string filePath);
+  Lexer(char* filePath);
 
   stack<Tree*>* Trees;
 
@@ -36,7 +38,6 @@ public:
   void ReadChar();
   void ReadString();
   void Primary();
-  void Name();
   void Consts();
   void Const();
   void ConstVal();

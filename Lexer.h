@@ -19,54 +19,14 @@ using namespace std;
 
 class Lexer {
 
-private:
-
 public:
+  Tree* Parse();
+
   Lexer(char* filePath);
-
   stack<Tree*>* Trees;
-
   FileReader* fileReader;
   queue<Token>* TokenQueue;
 
-  Tree* Parse();
-
-  void Tiny();
-  void ReadToken(TokenType type);
-  void ReadIdentifier();
-  void ReadInt();
-  void ReadChar();
-  void ReadString();
-  void Primary();
-  void Consts();
-  void Const();
-  void ConstVal();
-  void BuildTree(string name, int count);
-  void Expression();
-  void Assignment();
-  void Term();
-  void Factor();
-  void ForExp();
-  void ForStat();
-  void Body();
-  void Dcln();
-  void Dclns();
-  void Params();
-  void OtherwiseClause();
-  void CaseExpression();
-  void Statement();
-  void Caseclause();
-  int Caseclauses();
-  void LitList();
-  void Type();
-  void Types();
-  void StrNode();
-  void OutExp();
-  void Fcn();
-  void SubProgs();
-
-
-  void PrintQueue();
   void Initialize();
 
   Token GetToken(char read_char);
@@ -107,6 +67,40 @@ public:
   bool IsCloseParenthesis(char read_char);
   bool IsPossibleIdentifier(char read_char);
   bool IsHashTag(char read_char);
+
+  void Tiny();
+  void ReadToken(TokenType type);
+  void ReadIdentifier();
+  void ReadInt();
+  void ReadChar();
+  void ReadString();
+  void Primary();
+  void Consts();
+  void Const();
+  void ConstVal();
+  void Expression();
+  void Assignment();
+  void Term();
+  void Factor();
+  void ForExp();
+  void ForStatement();
+  void Body();
+  void Dcln();
+  void Dclns();
+  void Parameters();
+  void OtherwiseClause();
+  void CaseExpression();
+  void Statement();
+  void Caseclause();
+  int Caseclauses();
+  void LitList();
+  void Type();
+  void Types();
+  void OutExpression();
+  void Funct();
+  void SubProgs();
+
+  void BuildTree(string name, int count);
 
 };
 

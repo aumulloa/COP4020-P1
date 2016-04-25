@@ -127,13 +127,13 @@ void Lexer::SubProgs()  {
   int count = 0;
   while (TokenQueue->front().Type == Token_Function)
   {
-    Fcn();
+    Funct();
     count++;
   }
   BuildTree("subprogs", count);
 }
 
-void Lexer::Params()  {
+void Lexer::Parameters()  {
   int count = 1;
   Dcln();
   while (TokenQueue->front().Type == TokenSemiColon)
@@ -194,11 +194,11 @@ void Lexer::Body()  {
   BuildTree("block", count);
 }
 
-void Lexer::Fcn() {
+void Lexer::Funct() {
   ReadToken(Token_Function);
   ReadIdentifier();
   ReadToken(TokenOpenParenthesis);
-  Params();
+  Parameters();;
   ReadToken(TokenCloseParenthesis);
   ReadToken(TokenColon);
   ReadIdentifier();
@@ -212,9 +212,6 @@ void Lexer::Fcn() {
   BuildTree("fcn", 8);
 }
 
-void Lexer::StrNode()  {
-  ReadString();
-}
 
 int Lexer::Caseclauses()  {
   int count = 1;
@@ -333,10 +330,10 @@ void Lexer::CaseExpression()  {
   }
 }
 
-void Lexer::OutExp() {
+void Lexer::OutExpression() {
   if (TokenQueue->front().Type == TokenString)
   {
-    StrNode();
+    ReadString();
     BuildTree("string", 1);
   }
   else
@@ -378,7 +375,7 @@ void Lexer::Assignment()  {
   }
 }
 
-void Lexer::ForStat()  {
+void Lexer::ForStatement()  {
   if (TokenQueue->front().Type == TokenIdentifier)
   {
     Assignment();
@@ -515,11 +512,11 @@ void Lexer::Statement() {
       ReadToken(Token_Output);
       ReadToken(TokenOpenParenthesis);
       count = 1;
-      OutExp();
+      OutExpression();
       while (TokenQueue->front().Type == TokenComma)
       {
         ReadToken(TokenComma);
-        OutExp();
+        OutExpression();
         count++;
       }
       ReadToken(TokenCloseParenthesis);
@@ -565,11 +562,11 @@ void Lexer::Statement() {
     case Token_For:
       ReadToken(Token_For);
       ReadToken(TokenOpenParenthesis);
-      ForStat();
+      ForStatement();
       ReadToken(TokenSemiColon);
       ForExp();
       ReadToken(TokenSemiColon);
-      ForStat();
+      ForStatement();
       ReadToken(TokenCloseParenthesis);
       Statement();
       BuildTree("for", 4);
@@ -1236,15 +1233,6 @@ Token Lexer::ReadintegerToken(char read_char) {
   Token token_toReturn (temp_type, integer_string);
 
   return token_toReturn;
-}
-
-void Lexer::PrintQueue()  {
-
-  while(!TokenQueue->empty()) {
-    Token temp = TokenQueue->front();
-    TokenQueue->pop();
-    cout << "TokenType: " << temp.GetTokenString() << " TokenValue: " << temp.value << endl;
-  }
 }
 
 bool Lexer::IsOperator(char read_char)  {

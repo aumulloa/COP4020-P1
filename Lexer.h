@@ -5,6 +5,7 @@
 #include <string>
 #include <sstream>
 #include <stdexcept>
+#include <map>
 
 
 #include "FileReader.h"
@@ -20,6 +21,7 @@ using namespace std;
 class Lexer {
 
 public:
+
   Tree* Parse();
 
   Lexer(char* filePath);

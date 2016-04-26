@@ -33,7 +33,7 @@ void Lexer::ReadToken(TokenType type) {
   Token temp(type, "");
   if (token.Type != type)
   {
-    string message = "Expected: " + temp.GetTokenType();
+    string message = "Expected: " + temp.GetTokenString();
     message += ". Found: " + token.GetTokenString();
     throw logic_error(message);
   }
